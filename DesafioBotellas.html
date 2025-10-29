@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío: Escape Room</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Desafío B: Escape Room</h1>
+        <nav>
+            <a href="index.html" style="text-decoration: none; color: #005a9c;">&laquo; Volver al Inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="seccion-escape-room">
+            
+            <div class="teoria">
+                <h3>1. Enunciado del Problema</h3>
+                <p>En una sala de escape el equipo se encontró con el siguiente desafío para desbloquear la salida.</p>
+                <p>Sobre una mesa había <strong>cuatro copas</strong>, llenas hasta la mitad de un liquido transparente, fijas a la mesa y <strong>numeradas</strong> $3, 2, 1, 0$ de izquierda a derecha.</p>
+                <p>A un costado, <strong>dieciséis botellas</strong> en un cajón, <strong>numeradas</strong> $0, 1, 2, \dots , 15$ respectivamente, y con contenido aparentemente idéntico (en aspecto, olor, peso, etc.).</p>
+                
+                <div style="border: 1px solid #ccc; padding: 10px; background: #f9f9f9; margin: 15px 0; text-align: center;">
+                    <p>Había también una nota:</p>
+                    <blockquote style="font-family: serif; font-style: italic; margin-left: 20px; display: inline-block; text-align: left;">
+                        Entre dieciséis, sólo una es real,<br>
+                        una sola te abrirá el umbral.<br>
+                        Una entre todas guarda la cura:<br>
+                        Traerán las otras sólo penuria.<br>
+                        <br>
+                        Cuatro copas miran, sin voz ni color,<br>
+                        esperan la cura que traiga el fulgor.<br>
+                        Usá las copas, mezclá varias gotas,<br>
+                        Sin más demoras que el tiempo se agota.<br>
+                        <br>
+                        La cura prende, dos minutos después,<br>
+                        la mezcla transparente, sólo una vez.<br>
+                        Sabrás la respuesta, si organizas bien;<br>
+                        las copas prendidas te indicarán quién.<br>
+                        <br>
+                        Usá el ingenio, si quieres salir, <br>
+                        si aquí no te quieres quedar a morir.<br>
+                        Las cuatro copas la verdad van a hablar, <br>
+                        si sabés el secreto de numerar...
+                    </blockquote>
+                </div>
+                
+                <p>¿Podés <strong>diseñar un procedimiento</strong> (método, algoritmo) que te permita <strong>identificar cuál botella tiene la cura</strong>?</p>
+            </div>
+
+            <div class="io">
+                <h3>2. Interpretando el enunciado</h3>
+                <ul>
+                    <li>Tenemos que <strong>encontrar</strong> cuál de las botellas contiene <strong>la cura</strong>, <strong>usando las copas numeradas</strong> que están sobre la mesa.</li>
+                    <li>En las copas parece haber algún tipo de reactivo que <strong>cambia de color a los dos minutos</strong> de introducir la cura, y no se puede reutilizar.</li>
+                    <li>Nos incitan a <strong>mezclar varias gotas</strong> (presumiblemente del contenido de las botellas) para resolver el problema en un <strong>único intento</strong>, usando <strong>las cuatro copas a la vez</strong>.</li>
+                    <li>Además, según la pista del final, observando las copas se puede identificar la botella, y esto tiene algo que ver con <strong>numerar</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="interactivo" style="border-top: 2px dashed #005a9c; padding-top: 15px;">
+                <h3>3. El Simulador (El "Oráculo" Binario)</h3>
+                <p>La pista "...si sabés el secreto de numerar" es clave. Las 4 copas (Apagada/Prendida) pueden representar un número. Este simulador te muestra qué patrón de copas 'prendería' cada botella si fuera la cura.</p>
+
+                <div class="sim-controls-botellas">
+                    <label for="input_botella">Probar con Botella N°:</label>
+                    <input type="number" id="input_botella" min="0" max="15" value="0">
+                    <button id="btn_sim_botella">Ver Patrón</button>
+                </div>
+
+                <p>El patrón de copas (0 = transparente, 1 = color) es:</p>
+                <code id="resultado_binario_sim">0000</code>
+
+                <div id="copas_sim_container">
+                    </div>
+                <p style="font-size: 0.9em; text-align: center; margin-top: 10px;">(El número binario se lee de izquierda a derecha, correspondiendo a las copas 3, 2, 1 y 0)</p>
+            </div>
+            <div class="pseudocodigo">
+                <h3>4. Versión simplificada</h3>
+                <p>Para demostrar el poder de este consejo, comencemos con formular y resolver una versión mínima del problema. <strong>Supongamos que usamos sólo una copa y hay dos botellas</strong>.</p>
+                <ol>
+                    <li>Observemos que una botella tiene la cura y la otra no. ¿Cómo distinguirlas usando una sola copa?</li>
+                    <li>Digamos que los elementos de $B = \{ 0, 1 \}$ representan a las botellas, y que los elementos de $C_1 = \{ (0), (1) \}$ representan los <strong>estados</strong> en los que puede estar la copa, donde $0$ significa transparente y $1$ significa color.</li>
+                    <li>¿Cuántas formas hay de asignar <strong>biyectivamente</strong> botellas a estados? ¿Podría distinguir tres botellas con una sola copa?</li>
+                    <li>¿Cómo se pueden interpretar dichas asignaciones para escapar de la sala?</li>
+                </ol>
+            </div>
+            
+            <div class="interactivo" style="border-top: 2px dashed #005a9c; padding-top: 15px;">
+                <h3>5. Versión incrementada</h3>
+                <p>Supongamos que <strong>usamos dos copas y hay cuatro botellas</strong>. Ahora los elementos de $B = \{ 0, 1 , 2, 3\}$ representarán a las botellas y los elementos de $C_2 = \{ (00), (01), (10), (11) \}$ representan los <strong>estados</strong> en los que pueden estar, en conjunto, las dos copas ordenadas.</p>
+                <ol>
+                    <li>Explicar cómo la siguiente asignación: $ \{ 0 \to (00), 1 \to (01), 2 \to (10), 3 \to (11) \}$ resuelve el problema.</li>
+                    <li>Es decir, cómo se puede distinguir, en la sala de escape, la botella buscada usando esta información.</li>
+                    <li>Para 3 copas, $C_3 = \{ (000), (001), (010), (011), (100), (101), (110), (111) \}$.</li>
+                    <li>¿Reconocés algún patrón entre los conjuntos $C_1$, $C_2$ y $C_3$? <strong>(Pista: probá los números 0, 1, 2, 3 en el simulador de arriba)</strong></li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <script src="simuladorBotellas.js"></script>
+</body>
+</html>

@@ -3,144 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizador de Algoritmos</title>
+    <title>Matemática 3ro EMS - Inicio</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-
     <header>
-        <h1>Visualizador de Algoritmos Matemáticos</h1>
-        <p>Una herramienta para explorar el "paso a paso" de procedimientos matemáticos.</p>
+        <h1>Matemática 3<sup>ro</sup> EMS - General</h1>
+        <p>Nuestra base de operaciones para el proyecto final.</p>
     </header>
 
     <main>
-        <section id="seccion-cambio-base">
-            <h2>Algoritmo: Conversión de Base (Divisiones Sucesivas)</h2>
-
-            <div class="teoria">
-                <h3>1. Marco Teórico</h3>
-                <p>Normalmente usamos el sistema <strong>decimal (base 10)</strong>, que usa 10 dígitos (0-9). Sin embargo, las computadoras usan el sistema <strong>binario (base 2)</strong>, con solo dos dígitos (0 y 1). El sistema <strong>hexadecimal (base 16)</strong> se usa mucho en computación para abreviar números binarios largos, y utiliza 16 símbolos (0-9 y A-F, donde A=10, B=11, ..., F=15).</p>
-                <p>Este algoritmo nos permite convertir un número de nuestra base 10 a cualquier otra base (como 2 o 16).</p>
-            </div>
-
-            <div class="io">
-                <h3>2. Entrada y Salida</h3>
-                <dl>
-                    <dt>Input (Entrada):</dt>
-                    <dd>Un número entero <strong>positivo</strong> expresado en base 10 (decimal).</dd>
-                    
-                    <dt>Output (Salida):</dt>
-                    <dd>La representación de ese mismo número en la base nueva (2 o 16). Se interpreta leyendo los dígitos de izquierda a derecha, multiplicados por la potencia correspondiente de la nueva base.</dd>
-                </dl>
-            </div>
-
-            <div class="pseudocodigo">
-                <h3>3. Método (Pseudocódigo)</h3>
-                <p>Usamos el <strong>método de divisiones sucesivas</strong>:</p>
-                <pre><code>
-FUNCIÓN convertir(numero, base):
-  SI numero ES 0:
-    DEVOLVER "0"
-  
-  lista_de_restos = []
-
-  MIENTRAS numero > 0:
-    cociente = numero DIVISIÓN_ENTERA base
-    resto = numero MÓDULO base
-    
-    AÑADIR resto a lista_de_restos
-    
-    numero = cociente
-  
-  INVERTIR lista_de_restos
-  UNIR lista_de_restos en un string
-  DEVOLVER string_resultado
-                </code></pre>
+        <section id="seccion-desafios">
+            <h2>1. Los Desafíos Lógicos</h2>
+            <p>Acá encontrás los problemas de lógica que vamos a analizar y que sirven como base para el proyecto. Cada uno tiene un simulador interactivo para ayudarte a descubrir el patrón subyacente.</p>
+            
+            <div class="card-container"> 
+                <h3><a href="DesafioLockers.html">Desafío A: El Problema de los Casilleros (Lockers)</a></h3>
+                <p>Un problema clásico sobre divisores, estados y patrones. ¿Qué casilleros quedan abiertos después de 100 pasadas?</p>
             </div>
             
-            <div class="interactivo">
-                <h3>4. ¡Probá el Algoritmo!</h3>
-                <label for="input_decimal">Ingresá un número (en base 10):</label>
-                <input type="number" id="input_decimal" min="0" value="13">
-                
-                <button id="btn_binario">Convertir a Binario (Base 2)</button>
-                <button id="btn_hexa">Convertir a Hexadecimal (Base 16)</button>
-                
-                <h4>Resultado:</h4>
-                <code id="resultado_base">...</code>
-                
-                <h4>Paso a paso (Leyendo los restos de abajo hacia arriba):</h4>
-                <div id="pasos_base" class="pasos-container"></div>
+            <div class="card-container">
+                <h3><a href="DesafioBotellas.html">Desafío B: El Escape Room (Botellas)</a></h3>
+                <p>Un acertijo sobre cómo identificar un objeto entre 16 usando solo 4 "interruptores". Una pista sobre numeración es la clave.</p>
             </div>
         </section>
 
-        <section id="seccion-factorizacion">
-            <h2>Algoritmo: Descomposición en Factores Primos</h2>
+        <section id="seccion-consejos" style="background-color: #fcfcfc;">
+            <h2>2. Consejos Útiles para la Resolución de Problemas</h2>
+            <p>Como mencionamos en los repartidos, es fundamental tener una estrategia. Acá van los consejos clave:</p>
+            
+            <ul style="list-style-type: disc; margin-left: 20px;">
+                <li><strong>Visitá y revisitá el enunciado</strong> del problema, tantas veces como sea necesario, <strong>familiarizate</strong> con la situación. <strong>Subrayá</strong> los aspectos clave.</li>
+                <li><strong>Probá primero una versión más simple</strong> del problema, lo más simple posible. Cuando hayas explorado suficiente esta versión, incrementá un poco el tamaño.</li>
+                <li>¡Dibujá! Hacé <strong>esquemas</strong> que ayuden a <strong>visualizar</strong> las partes del problema, y el razonamiento que estás empleando al resolverlo.</li>
+                <li><strong>Generá intución</strong> sobre el problema: <strong>explorá</strong> qué podés hacer, calcular, etc. con <strong>la información dada</strong>. Cualquier camino explorado sirve: cualquier información es información útil.</li>
+                <li>Intentá <strong>abstraer los elementos principales</strong> del problema, y compará con otros <strong>problemas conocidos</strong>. ¿Ya resolviste algo así antes? ¿Ya lo hizo alguien más?</li>
+            </ul>
+        </section>
 
-            <div class="teoria">
-                <h3>1. Marco Teórico</h3>
-                <p>Un número primo es un número natural mayor que 1 que solo tiene dos divisores: 1 y él mismo (ej: 2, 3, 5, 7, 11...).</p>
-                <p>El <strong>Teorema Fundamental de la Aritmética</strong> (que vimos en el repartido, fuente: 3488) nos garantiza que todo número compuesto (mayor que 1 y no primo) puede escribirse de forma <strong>única</strong> como un producto de números primos.</p>
-                <p>Este algoritmo encuentra esa lista única de factores primos.</p>
-            </div>
+        <section id="seccion-algoritmos">
+            <h2>3. Algoritmos Matemáticos (para el Proyecto)</h2>
+            <p>Acá centralizamos la página que contiene los visualizadores de algoritmos que vamos a discutir en clase y que son centrales para el proyecto final.</p>
+            
+            <h3 style="text-align: center; margin-top: 15px;">
+                <a href="algoritmosMatematicos.html" style="text-decoration: none; padding: 10px 15px; background-color: #005a9c; color: white; border-radius: 5px;">
+                    Ir a los Visualizadores de Algoritmos
+                </a>
+            </h3>
+            <p style="text-align: center; font-size: 0.9em; margin-top: 10px;">(Página única con Conversión de Base y Descomposición Factorial)</p>
+        </section>
 
-            <div class="io">
-                <h3>2. Entrada y Salida</h3>
-                <dl>
-                    <dt>Input (Entrada):</dt>
-                    <dd>Un número entero <strong>mayor que 1</strong>.</dd>
-                    
-                    <dt>Output (Salida):</dt>
-                    <dd>La lista de números primos cuyo producto es igual al número de entrada. (Ej: para 60, la salida es "2 x 2 x 3 x 5").</dd>
-                </dl>
-            </div>
-
-            <div class="pseudocodigo">
-                <h3>3. Método (Pseudocódigo)</h3>
-                <p>Usamos el <strong>método de divisiones de prueba (trial division)</strong>:</p>
-                <pre><code>
-FUNCIÓN factorizar(numero):
-  lista_de_factores = []
-
-  // Primero, sacamos todos los factores '2'
-  MIENTRAS numero ES DIVISIBLE POR 2:
-    AÑADIR "2" a lista_de_factores
-    numero = numero / 2
-  
-  // Ahora, probamos con impares desde 3
-  // Solo necesitamos probar hasta la raíz cuadrada de 'numero'
-  divisor = 3
-  MIENTRAS divisor * divisor <= numero:
-    MIENTRAS numero ES DIVISIBLE POR divisor:
-      AÑADIR divisor a lista_de_factores
-      numero = numero / divisor
-    divisor = divisor + 2
-    
-  // Si 'numero' es > 1 al final, es porque él mismo es primo
-  SI numero > 1:
-    AÑADIR numero a lista_de_factores
-    
-  DEVOLVER lista_de_factores
-                </code></pre>
-            </div>
-
-            <div class="interactivo">
-                <h3>4. ¡Probá el Algoritmo!</h3>
-                <label for="input_factor">Ingresá un número (entero > 1):</label>
-                <input type="number" id="input_factor" min="2" value="60">
-                
-                <button id="btn_factorizar">Descomponer en Primos</button>
-                
-                <h4>Factores (Resultado):</h4>
-                <code id="resultado_factor">...</code>
-                
-                <h4>Paso a paso (Divisiones sucesivas):</h4>
-                <div id="pasos_factor" class="pasos-container"></div>
-            </div>
+        <section id="seccion-teorico" style="background-color: #f0f7ff; border-left: 5px solid #005a9c;">
+            <h2>4. Marco Teórico (Repaso)</h2>
+            <p>Para fundamentar la resolución de los desafíos y la implementación de los algoritmos, es clave tener fresco el sustento teórico que vimos en clase (División Entera, Teorema Fundamental, Sistemas de Numeración).</p>
+            <p>Todo ese contenido, extraído textualmente de los repartidos, lo vamos a centralizar en la siguiente página:</p>
+            
+            <h3 style="text-align: center; margin-top: 15px;">
+                <a href="marcoTeorico.html" style="text-decoration: none; padding: 10px 15px; background-color: #005a9c; color: white; border-radius: 5px;">
+                    Ir al Marco Teórico
+                </a>
+            </h3>
         </section>
     </main>
-
-    <script src="cambioDeBase.js"></script>
-    <script src="factorizacion.js"></script>
+    
+    <footer>
+        <p style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #555;">
+            Recursos didácticos - Matemática 3ro EMS.
+        </p>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Algoritmos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>Visualizador de Algoritmos Matemáticos</h1>
+        <p>Una herramienta para explorar el "paso a paso" de procedimientos matemáticos.</p>
+    </header>
+
+    <main>
+        <section id="seccion-cambio-base">
+            <h2>Algoritmo: Conversión de Base (Divisiones Sucesivas)</h2>
+
+            <div class="teoria">
+                <h3>1. Marco Teórico</h3>
+                <p>Normalmente usamos el sistema <strong>decimal (base 10)</strong>, que usa 10 dígitos (0-9). Sin embargo, las computadoras usan el sistema <strong>binario (base 2)</strong>, con solo dos dígitos (0 y 1). El sistema <strong>hexadecimal (base 16)</strong> se usa mucho en computación para abreviar números binarios largos, y utiliza 16 símbolos (0-9 y A-F, donde A=10, B=11, ..., F=15).</p>
+                <p>Este algoritmo nos permite convertir un número de nuestra base 10 a cualquier otra base (como 2 o 16).</p>
+            </div>
+
+            <div class="io">
+                <h3>2. Entrada y Salida</h3>
+                <dl>
+                    <dt>Input (Entrada):</dt>
+                    <dd>Un número entero <strong>positivo</strong> expresado en base 10 (decimal).</dd>
+                    
+                    <dt>Output (Salida):</dt>
+                    <dd>La representación de ese mismo número en la base nueva (2 o 16). Se interpreta leyendo los dígitos de izquierda a derecha, multiplicados por la potencia correspondiente de la nueva base.</dd>
+                </dl>
+            </div>
+
+            <div class="pseudocodigo">
+                <h3>3. Método (Pseudocódigo)</h3>
+                <p>Usamos el <strong>método de divisiones sucesivas</strong>:</p>
+                <pre><code>
+FUNCIÓN convertir(numero, base):
+  SI numero ES 0:
+    DEVOLVER "0"
+  
+  lista_de_restos = []
+
+  MIENTRAS numero > 0:
+    cociente = numero DIVISIÓN_ENTERA base
+    resto = numero MÓDULO base
+    
+    AÑADIR resto a lista_de_restos
+    
+    numero = cociente
+  
+  INVERTIR lista_de_restos
+  UNIR lista_de_restos en un string
+  DEVOLVER string_resultado
+                </code></pre>
+            </div>
+            
+            <div class="interactivo">
+                <h3>4. ¡Probá el Algoritmo!</h3>
+                <label for="input_decimal">Ingresá un número (en base 10):</label>
+                <input type="number" id="input_decimal" min="0" value="13">
+                
+                <button id="btn_binario">Convertir a Binario (Base 2)</button>
+                <button id="btn_hexa">Convertir a Hexadecimal (Base 16)</button>
+                
+                <h4>Resultado:</h4>
+                <code id="resultado_base">...</code>
+                
+                <h4>Paso a paso (Leyendo los restos de abajo hacia arriba):</h4>
+                <div id="pasos_base" class="pasos-container"></div>
+            </div>
+        </section>
+
+        <section id="seccion-factorizacion">
+            <h2>Algoritmo: Descomposición en Factores Primos</h2>
+
+            <div class="teoria">
+                <h3>1. Marco Teórico</h3>
+                <p>Un número primo es un número natural mayor que 1 que solo tiene dos divisores: 1 y él mismo (ej: 2, 3, 5, 7, 11...).</p>
+                <p>El <strong>Teorema Fundamental de la Aritmética</strong> (que vimos en el repartido, fuente: 3488) nos garantiza que todo número compuesto (mayor que 1 y no primo) puede escribirse de forma <strong>única</strong> como un producto de números primos.</p>
+                <p>Este algoritmo encuentra esa lista única de factores primos.</p>
+            </div>
+
+            <div class="io">
+                <h3>2. Entrada y Salida</h3>
+                <dl>
+                    <dt>Input (Entrada):</dt>
+                    <dd>Un número entero <strong>mayor que 1</strong>.</dd>
+                    
+                    <dt>Output (Salida):</dt>
+                    <dd>La lista de números primos cuyo producto es igual al número de entrada. (Ej: para 60, la salida es "2 x 2 x 3 x 5").</dd>
+                </dl>
+            </div>
+
+            <div class="pseudocodigo">
+                <h3>3. Método (Pseudocódigo)</h3>
+                <p>Usamos el <strong>método de divisiones de prueba (trial division)</strong>:</p>
+                <pre><code>
+FUNCIÓN factorizar(numero):
+  lista_de_factores = []
+
+  // Primero, sacamos todos los factores '2'
+  MIENTRAS numero ES DIVISIBLE POR 2:
+    AÑADIR "2" a lista_de_factores
+    numero = numero / 2
+  
+  // Ahora, probamos con impares desde 3
+  // Solo necesitamos probar hasta la raíz cuadrada de 'numero'
+  divisor = 3
+  MIENTRAS divisor * divisor <= numero:
+    MIENTRAS numero ES DIVISIBLE POR divisor:
+      AÑADIR divisor a lista_de_factores
+      numero = numero / divisor
+    divisor = divisor + 2
+    
+  // Si 'numero' es > 1 al final, es porque él mismo es primo
+  SI numero > 1:
+    AÑADIR numero a lista_de_factores
+    
+  DEVOLVER lista_de_factores
+                </code></pre>
+            </div>
+
+            <div class="interactivo">
+                <h3>4. ¡Probá el Algoritmo!</h3>
+                <label for="input_factor">Ingresá un número (entero > 1):</label>
+                <input type="number" id="input_factor" min="2" value="60">
+                
+                <button id="btn_factorizar">Descomponer en Primos</button>
+                
+                <h4>Factores (Resultado):</h4>
+                <code id="resultado_factor">...</code>
+                
+                <h4>Paso a paso (Divisiones sucesivas):</h4>
+                <div id="pasos_factor" class="pasos-container"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="cambioDeBase.js"></script>
+    <script src="factorizacion.js"></script>
+</body>
+</html>

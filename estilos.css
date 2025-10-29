@@ -135,3 +135,124 @@ code { /* Para el resultado final */
     font-size: 1.1em;
     padding: 2px 0;
 }
+
+/* --- Estilos para el Simulador de Lockers --- */
+
+.sim-controls {
+    display: flex;
+    flex-wrap: wrap; /* Para que se adapte en pantallas chicas */
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.sim-controls div {
+    margin: 5px;
+}
+
+/* Estilo para la grilla de lockers */
+#grilla_lockers_sim {
+    display: grid;
+    /* Columnas automáticas: que midan mínimo 50px
+       y se ajusten para llenar el espacio */
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 8px; /* Espacio entre lockers */
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+}
+
+/* Estilo para cada locker individual */
+.locker {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    /* Transición suave para los cambios */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Estado Cerrado */
+.locker.cerrado {
+    background-color: #f8d7da; /* Rojo pálido */
+    color: #721c24; /* Rojo oscuro */
+    border-color: #f5c6cb;
+}
+
+/* Estado Abierto */
+.locker.abierto {
+    background-color: #d4edda; /* Verde pálido */
+    color: #155724; /* Verde oscuro */
+    border-color: #c3e6cb;
+}
+
+/* Estado de Animación (cuando es "tocado") */
+.locker.highlight {
+    border: 2px solid #005a9c; /* Borde azul (nuestro color principal) */
+    box-shadow: 0 0 10px rgba(0, 90, 156, 0.5); /* Sombra azul */
+    transform: scale(1.1); /* Lo agranda un poquito */
+}
+
+/* --- Estilos para el Simulador de Botellas --- */
+
+.sim-controls-botellas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Espacio entre elementos */
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#copas_sim_container {
+    display: flex;
+    flex-wrap: wrap; /* Para que se apilen en pantallas chicas */
+    justify-content: center;
+    gap: 15px; /* Espacio entre copas */
+    margin-top: 15px;
+    padding: 10px;
+}
+
+/* Estilo para cada copa */
+.copa-sim {
+    border: 2px solid #aaa;
+    border-radius: 5px 5px 10px 10px; /* Bordes de "copa" */
+    width: 80px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.copa-sim span {
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+/* Estado "Transparente" */
+.copa-sim.copa-off {
+    background-color: #f0f0f0;
+    color: #888;
+    border-color: #ccc;
+}
+
+/* Estado "Color" (reactivo) */
+.copa-sim.copa-on {
+    background-color: #d4edda; /* Verde pálido (igual que locker abierto) */
+    color: #155724; /* Verde oscuro */
+    border-color: #c3e6cb;
+    box-shadow: 0 0 10px rgba(100, 200, 100, 0.5);
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafío: El Problema de los Casilleros</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Desafío Lógico A: Locker Room</h1>
+        <nav>
+            <a href="index.html" style="text-decoration: none; color: #005a9c;">&laquo; Volver al Inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="seccion-lockers">
+            
+            <div class="teoria">
+                <h3>1. El Problema (El Enunciado)</h3>
+                <p>En un liceo hay <strong>100 lockers</strong> en un pasillo, todos <strong>inicialmente cerrados</strong> y numerados consecutivamente $1, 2, 3, \dots, 100$.</p>
+                <p>También hay <strong>100 estudiantes</strong> que, en fila y <strong>por orden de lista</strong>, caminan por el pasillo <strong>cambiando el estado</strong> (si está abierto lo cierra, si está cerrado lo abre) <strong>de todos los lockers múltiplos de su número de lista</strong>.</p>
+                <p>Es decir: Pasa el <strong>estudiante 1</strong> y los abre todos. Luego, pasa el <strong>estudiante 2</strong> y cambia el estado (cierra) de los múltiplos de 2. Pasa el <strong>estudiante 3</strong> y hace lo mismo con los múltiplos de 3, <strong>y así sucesivamente</strong> hasta que pasa el <strong>estudiante 100</strong>.</p>
+                <p style="font-weight: bold; font-size: 1.1em; text-align: center; margin-top: 15px;">
+                    Al final del proceso, ¿qué números de lockers quedan abiertos y por qué?
+                </p>
+            </div>
+
+            <div class="pseudocodigo">
+                <h3>2. Desglosando las Reglas (Interpretación)</h3>
+                <p>Antes de empezar, asegurate de entender bien las reglas del juego:</p>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li><strong>"Cambiar el estado"</strong> es la operación clave. Es un interruptor: Abierto &rarr; Cerrado; Cerrado &rarr; Abierto.</li>
+                    <li>Cada casillero arranca "Cerrado".</li>
+                    <li>El <strong>Estudiante 'k'</strong> solo toca los casilleros que son <strong>múltiplos de 'k'</strong>.</li>
+                    <li>El Estudiante 1 toca todos (1, 2, 3,...).</li>
+                    <li>El Estudiante 2 toca los pares (2, 4, 6,...).</li>
+                    <li>El Estudiante 7 toca (7, 14, 21,...).</li>
+                    <li>El Estudiante 100 solo toca el casillero 100.</li>
+                </ul>
+            </div>
+            
+            <div class="interactivo" style="border-top: 2px dashed #005a9c; padding-top: 15px;">
+                
+                <h3>3. El Simulador (Tu Herramienta de Exploración)</h3>
+                <p>La mejor forma de "entender" este problema es verlo en acción. Usá el simulador de abajo para explorar. Empezá con pocos lockers (ej: 20) y andá probando.</p>
+                
+                <div class="sim-controls">
+                    <div>
+                        <label for="input_n_lockers">N° de Lockers:</label>
+                        <input type="number" id="input_n_lockers" value="20" min="5" max="100">
+                    </div>
+                    <div>
+                        <button id="btn_iniciar_sim">Iniciar</button>
+                        <button id="btn_reset_sim">Reset</button>
+                    </div>
+                    <div>
+                        <label for="slider_velocidad">Velocidad:</label>
+                        <input type="range" id="slider_velocidad" min="50" max="1000" value="500" step="50">
+                    </div>
+                </div>
+                
+                <h4 id="info_paso_sim">Estado: Listo para iniciar.</h4>
+                
+                <div id="grilla_lockers_sim"></div>
+            </div>
+
+            <div class="io" style="background-color: #f0f7ff; border-left: 5px solid #005a9c; padding-top: 10px; padding-bottom: 10px; margin-top: 20px;">
+                <h3>4. Indagación Guiada (Usando el Simulador)</h3>
+                <p>Ahora sí, vamos a sacarle jugo. Te propongo una serie de pasos para descubrir el patrón:</p>
+                <ol style="margin-left: 20px;">
+                    <li><strong>Primera Prueba (N=20):</strong> Reseteá la simulación, poné <strong>20 lockers</strong> y dale "Iniciar". Dejalo terminar.
+                        <br><strong>Pregunta:</strong> ¿Qué números de casilleros quedaron abiertos? Anotalos.</li>
+                    
+                    <li><strong>Segunda Prueba (N=30):</strong> Hacé lo mismo con <strong>30 lockers</strong>.
+                        <br><strong>Pregunta:</strong> ¿Cuáles quedaron abiertos? ¿Se agregaron nuevos a tu lista anterior?</li>
+                    
+                    <li><strong>Buscando el Patrón:</strong> Mirá la lista de números que quedaron abiertos (seguramente son: 1, 4, 9, 16, 25...).
+                        <br><strong>Pregunta:</strong> ¿Qué tienen en común esos números? ¿Qué tipo de números son? Si tuvieras 100 lockers, ¿cuáles *creés* que quedarían abiertos?</li>
+
+                    <li><strong>El "Por Qué" (El Proceso):</strong> Ahora no mires el resultado final, sino el *proceso*. Reseteá con 20 lockers y poné la velocidad en "Lento" (slider a la izquierda).
+                        <br><strong>Observá:</strong> Fijate en el <strong>Locker N° 12</strong>. ¿Cuántas veces lo tocan (se pone amarillo)? ¿Qué estudiantes lo tocan?</li>
+
+                    <li><strong>Comparando:</strong> Ahora fijate en el <strong>Locker N° 9</strong>.
+                        <br><strong>Observá:</strong> ¿Cuántas veces lo tocan? ¿Qué estudiantes lo tocan?</li>
+                    
+                    <li><strong>Pregunta Final:</strong> Ahora, con esas observaciones:
+                        <ul style="list-style-type: disc; margin-left: 20px;">
+                            <li>¿Qué relación encontrás entre la <strong>cantidad de veces</strong> que un locker es tocado y su <strong>estado final</strong> (abierto/cerrado)?</li>
+                            <li>¿Y qué relación hay entre los <strong>estudiantes que tocan</strong> un locker y el <strong>número</strong> de ese locker?</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="simuladorLockers.js"></script>
+</body>
+</html>
