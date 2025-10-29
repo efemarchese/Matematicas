@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desafío: Escape Room</title>
     <link rel="stylesheet" href="estilos.css">
+    <!-- Scripts para MathJax (traductor de LaTeX) -->
+    <script src="math-config.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -25,6 +27,7 @@
                 <p>Sobre una mesa había <strong>cuatro copas</strong>, llenas hasta la mitad de un liquido transparente, fijas a la mesa y <strong>numeradas</strong> $3, 2, 1, 0$ de izquierda a derecha.</p>
                 <p>A un costado, <strong>dieciséis botellas</strong> en un cajón, <strong>numeradas</strong> $0, 1, 2, \dots , 15$ respectivamente, y con contenido aparentemente idéntico (en aspecto, olor, peso, etc.).</p>
                 
+                <!-- Poema centrado, como pediste -->
                 <div style="border: 1px solid #ccc; padding: 10px; background: #f9f9f9; margin: 15px 0; text-align: center;">
                     <p>Había también una nota:</p>
                     <blockquote style="font-family: serif; font-style: italic; margin-left: 20px; display: inline-block; text-align: left;">
@@ -63,25 +66,9 @@
                 </ul>
             </div>
 
-            <div class="interactivo" style="border-top: 2px dashed #005a9c; padding-top: 15px;">
-                <h3>3. El Simulador (El "Oráculo" Binario)</h3>
-                <p>La pista "...si sabés el secreto de numerar" es clave. Las 4 copas (Apagada/Prendida) pueden representar un número. Este simulador te muestra qué patrón de copas 'prendería' cada botella si fuera la cura.</p>
-
-                <div class="sim-controls-botellas">
-                    <label for="input_botella">Probar con Botella N°:</label>
-                    <input type="number" id="input_botella" min="0" max="15" value="0">
-                    <button id="btn_sim_botella">Ver Patrón</button>
-                </div>
-
-                <p>El patrón de copas (0 = transparente, 1 = color) es:</p>
-                <code id="resultado_binario_sim">0000</code>
-
-                <div id="copas_sim_container">
-                    </div>
-                <p style="font-size: 0.9em; text-align: center; margin-top: 10px;">(El número binario se lee de izquierda a derecha, correspondiendo a las copas 3, 2, 1 y 0)</p>
-            </div>
+            <!-- Sección 3 anterior (Versión simplificada) -->
             <div class="pseudocodigo">
-                <h3>4. Versión simplificada</h3>
+                <h3>3. Versión simplificada</h3>
                 <p>Para demostrar el poder de este consejo, comencemos con formular y resolver una versión mínima del problema. <strong>Supongamos que usamos sólo una copa y hay dos botellas</strong>.</p>
                 <ol>
                     <li>Observemos que una botella tiene la cura y la otra no. ¿Cómo distinguirlas usando una sola copa?</li>
@@ -91,19 +78,46 @@
                 </ol>
             </div>
             
+            <!-- Sección 4 anterior (Versión incrementada) -->
             <div class="interactivo" style="border-top: 2px dashed #005a9c; padding-top: 15px;">
-                <h3>5. Versión incrementada</h3>
+                <h3>4. Versión incrementada</h3>
                 <p>Supongamos que <strong>usamos dos copas y hay cuatro botellas</strong>. Ahora los elementos de $B = \{ 0, 1 , 2, 3\}$ representarán a las botellas y los elementos de $C_2 = \{ (00), (01), (10), (11) \}$ representan los <strong>estados</strong> en los que pueden estar, en conjunto, las dos copas ordenadas.</p>
                 <ol>
                     <li>Explicar cómo la siguiente asignación: $ \{ 0 \to (00), 1 \to (01), 2 \to (10), 3 \to (11) \}$ resuelve el problema.</li>
                     <li>Es decir, cómo se puede distinguir, en la sala de escape, la botella buscada usando esta información.</li>
                     <li>Para 3 copas, $C_3 = \{ (000), (001), (010), (011), (100), (101), (110), (111) \}$.</li>
-                    <li>¿Reconocés algún patrón entre los conjuntos $C_1$, $C_2$ y $C_3$? <strong>(Pista: probá los números 0, 1, 2, 3 en el simulador de arriba)</strong></li>
+                    <!-- CAMBIO: Actualizada la pista para que apunte al final de la página -->
+                    <li>¿Reconocés algún patrón entre los conjuntos $C_1$, $C_2$ y $C_3$? <strong>(Pista: probá los números 0, 1, 2, 3 en el simulador que se encuentra al final de la página)</strong></li>
                 </ol>
             </div>
+
+            <!-- =========== NUEVA SECCIÓN 5 (El Simulador, movido y reescrito) =========== -->
+            <div class="interactivo" style="border-top: 2px dashed #005a9c; padding-top: 15px; margin-top: 20px; background-color: #f9f9f9;">
+                <h3>5. Simulador de Asignaciones</h3>
+                <p>La pista "...si sabés el secreto de numerar" y las preguntas de las secciones anteriores sugieren un método para <strong>asignar</strong> un patrón único de copas (prendidas/apagadas) a cada botella. Esta herramienta te permite visualizar esas asignaciones.</p>
+
+                <div class="sim-controls-botellas">
+                    <label for="input_botella">Probar con Botella N°:</label>
+                    <input type="number" id="input_botella" min="0" max="15" value="0">
+                    <button id="btn_sim_botella">Ver Patrón</button>
+                </div>
+
+                <p>El patrón de copas resultante (0 = transparente, 1 = color) es:</p>
+                <code id="resultado_binario_sim">0000</code>
+
+                <div id="copas_sim_container">
+                    <!-- El JS va a generar las copas acá -->
+                </div>
+                <p style="font-size: 0.9em; text-align: center; margin-top: 10px;">
+                    Usa esto para verificar tus hipótesis de las secciones 3 y 4. ¿Qué "secreto de numerar" te permite predecir el patrón de copas para cualquier botella?
+                </p>
+            </div>
+            <!-- ================================================== -->
+
         </section>
     </main>
 
+    <!-- El script se mantiene igual y se carga al final -->
     <script src="simuladorBotellas.js"></script>
 </body>
 </html>
