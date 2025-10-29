@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marco Teórico - Matemática 3ro</title>
+    <link rel="stylesheet" href="estilos.css">
+
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Marco Teórico (Repaso)</h1>
+        <nav>
+            <a href="index.html" style="text-decoration: none; color: #005a9c;">&laquo; Volver al Inicio</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="indice" style="background-color: #f9f9f9;">
+            <h2>Índice de Contenidos</h2>
+            <p>Hacé clic en un tema para ir directamente a la sección correspondiente.</p>
+            <nav>
+                <ul style="list-style-type: disc; margin-left: 20px;">
+                    <li><a href="#division">1. División Entera (en $\mathbb{N}$)</a>
+                        <ul>
+                            <li><a href="#division-teorema">1.1. Teorema de la División</a></li>
+                            <li><a href="#division-obs">1.2. Observaciones</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#primos">2. Números Primos y Descomposición Factorial</a>
+                        <ul>
+                            <li><a href="#primos-definicion">2.1. Definición</a></li>
+                            <li><a href="#primos-tfa">2.2. Teorema Fundamental de la Aritmética (TFA)</a></li>
+                            <li><a href="#primos-algoritmo">2.3. Algoritmo: Divisiones de Prueba</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#sistemas-numeracion">3. Sistemas de Numeración (Cambio de Base)</a>
+                        <ul>
+                            <li><a href="#numeracion-decimal">3.1. Representación Decimal (Base 10)</a></li>
+                            <li><a href="#numeracion-baseb">3.2. Representación en Base 'b'</a></li>
+                            <li><a href="#numeracion-algoritmo">3.3. Algoritmo: Divisiones Sucesivas (para Cambio de Base)</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+
+        <section id="division">
+            <h2>1. División Entera (en $\mathbb{N}$)</h2>
+            
+            <h3 id="division-teorema">1.1. Teorema de la División</h3>
+            <p>Dados $D \in \mathbb{N}$ (dividendo) y $d \in \mathbb{N}$ (divisor), con $d \neq 0$, existen únicos $q \in \mathbb{N}$ (cociente) y $r \in \mathbb{N}$ (resto), con $0 \le r \le d-1$ que satisfacen:</p>
+            <p style="text-align: center; font-size: 1.2em; font-family: 'Courier New', monospace;">
+                $D = d \times q + r$
+            </p>
+
+            <h3 id="division-obs">1.2. Observaciones</h3>
+            <ol>
+                <li>La división (entera) tiene dos resultados: el cociente y el resto.</li>
+                <li>Tenemos prohibida la división entre cero: cero nunca puede ser divisor. El algoritmo de restas sucesivas nunca termina, y el teorema pierde la (preciada) unicidad.</li>
+                <li>Al dividir en la calculadora se efectúa la división real $D/d$. Sin embargo, la parte entera (lo que está antes de la coma) de $D/d$ coincide con el cociente de la división $D \div d$. Se usa la ecuación (1) para determinar el resto.</li>
+                <li>Cuando el divisor es d, el resto siempre es un número natural entre 0 y d-1.</li>
+            </ol>
+            
+            <div class="nav-footer" style="text-align: right; font-size: 0.9em; margin-top: 15px;">
+                <a href="#indice">Volver al Índice</a>
+            </div>
+        </section>
+
+        <section id="primos">
+            <h2>2. Números Primos y Descomposición Factorial</h2>
+            
+            <h3 id="primos-definicion">2.1. Definición</h3>
+            <p>Un número primo es un número natural mayor que 1 que solo tiene dos divisores positivos distintos: 1 y él mismo. Los números que tienen más de dos divisores se llaman números compuestos.</p>
+            <p>Ejemplos de primos: $2, 3, 5, 7, 11, 13, \dots$</p>
+            <p>Ejemplos de compuestos: $4, 6, 8, 9, 10, 12, \dots$</p>
+
+            <h3 id="primos-tfa">2.2. Teorema Fundamental de la Aritmética (TFA)</h3>
+            <p>Este es uno de los teoremas más importantes de la teoría de números. Afirma que:</p>
+            <blockquote style="font-family: serif; font-style: italic; margin-left: 20px; padding: 10px; border-left: 4px solid #ccc;">
+                Todo número natural compuesto (mayor que 1) se puede escribir de forma <strong>única</strong> (salvo el orden) como un producto de números primos.
+            </blockquote>
+            <p>Por ejemplo, la descomposición factorial de $60$ es $2 \times 2 \times 3 \times 5$ (o $2^2 \times 3 \times 5$), y no hay ninguna otra combinación de números primos que multiplicados den 60.</p>
+            <p>Este teorema es la base del <strong>Desafío de los Lockers</strong> (ya que la cantidad de divisores depende de los exponentes en esta descomposición) y del <strong>Desafío de Programación A</strong>.</p>
+
+            <h3 id="primos-algoritmo">2.3. Algoritmo: Divisiones de Prueba (Trial Division)</h3>
+            <p>Para encontrar la descomposición en factores primos de un número $n$ (como se pide en el Desafío de Programación), se utiliza el algoritmo de divisiones de prueba:</p>
+            <ol>
+                <li>Se empieza probando con el primer primo, $d=2$.</li>
+                <li>Mientras $n$ sea divisible por $d$, se añade $d$ a la lista de factores y se actualiza $n = n / d$.</li>
+                <li>Cuando $n$ ya no es divisible por $d$, se pasa al siguiente divisor (primero $d=3$, y luego se puede optimizar probando solo impares $d = d+2$).</li>
+                <li>Se repite este proceso. Solo es necesario probar divisores $d$ hasta que $d^2 > n$.</li>
+                <li>Si al final de este proceso $n$ es mayor que 1, significa que ese valor restante de $n$ es él mismo un número primo, y se añade a la lista.</li>
+            </ol>
+            
+            <div class="nav-footer" style="text-align: right; font-size: 0.9em; margin-top: 15px;">
+                <a href="#indice">Volver al Índice</a>
+            </div>
+        </section>
+        
+        <section id="sistemas-numeracion">
+            <h2>3. Sistemas de Numeración (Cambio de Base)</h2>
+            <p>Este es el sustento teórico principal para el <b>Desafío de las Botellas (Escape Room)</b>.</p>
+
+            <h3 id="numeracion-decimal">3.1. Representación Decimal (Base 10)</h3>
+            <p>Normalmente usamos el sistema decimal. Los dígitos permitidos son los números naturales del $0$ al $9$. Observar que son 10 dígitos posibles.</p>
+            <p>Es un sistema <strong>posicional</strong>: la posición de cada dígito indica la potencia de 10 por la que se multiplica. Dada una secuencia finita de dígitos (entre 0 y 9), para evaluar a qué natural corresponde, se multiplica cada dígito $d_i$ por la potencia $10^i$ correspondiente a su posición (contando de derecha a izquierda, empezando en $i=0$).</p>
+            <p>Por ejemplo: $1538 = 1 \times 10^3 + 5 \times 10^2 + 3 \times 10^1 + 8 \times 10^0$.</p>
+
+            <h3 id="numeracion-baseb">3.2. Representación en Base 'b'</h3>
+            <p>Generalizando lo anterior, sea $b \in \mathbb{N}$, con $b > 1$ el natural elegido como base. Los dígitos $D$ permitidos serán $D = \{ 0, 1, \dots, b - 1 \}$.</p>
+            <ul>
+                <li>Si $b=2$ (binario), los dígitos son $\{0, 1\}$.</li>
+                <li>Si $b=16$ (hexadecimal), los dígitos son $\{0, 1, \dots, 9, A, B, C, D, E, F\}$.</li>
+            </ul>
+            <p>Sea $n \in \mathbb{N}$ el natural que se quiere representar. Por el teorema de la división entera, la (única) representación de $n$ en base $b$ quedará dada por:</p>
+            <p style="text-align: center; font-size: 1.2em; font-family: 'Courier New', monospace;">
+                $n = d_k \cdot b^k + \dots + d_2 \cdot b^2 + d_1 \cdot b^1 + d_0 \cdot b^0$
+            </p>
+            <p>Donde todos los dígitos $d_i$ pertenecen al conjunto $D$.</p>
+
+            <h3 id="numeracion-algoritmo">3.3. Algoritmo: Divisiones Sucesivas (para Cambio de Base)</h3>
+            <p>Para encontrar los dígitos $d_0, d_1, \dots, d_k$ que representan a un número $n$ (en base 10) en una nueva base $b$:</p>
+            <blockquote style="font-family: serif; font-style: italic; margin-left: 20px; padding: 10px; border-left: 4px solid #ccc;">
+                Se divide sucesivamente $n$ entre $b$. Los sucesivos <strong>restos</strong> serán los dígitos que le corresponden a $n$ en dicha base, leídos <strong>de derecha a izquierda</strong> (o del último resto al primero).
+            </blockquote>
+            <p>Este es el algoritmo que implementa el <strong>Visualizador de Cambio de Base</strong> y es la solución al problema de las botellas (donde $n$ es el número de botella y $b=2$).</p>
+            
+            <div class="nav-footer" style="text-align: right; font-size: 0.9em; margin-top: 15px;">
+                <a href="#indice">Volver al Índice</a>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer>
+        <p style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #555;">
+            Recursos didácticos - Matemática 3ro EMS.
+        </p>
+    </footer>
+</body>
+</html>
